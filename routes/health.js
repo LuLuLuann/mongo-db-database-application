@@ -14,7 +14,7 @@ export const healthRouter = new Router();
 // });
 
 // C
-healthRouter.post("/health", async (req, res) => {
+healthRouter.post("/", async (req, res) => {
   try {
     const health = new Health(req.body);
     await health.save();
@@ -27,7 +27,7 @@ healthRouter.post("/health", async (req, res) => {
 
 // R
 // get all the health records
-healthRouter.get("/health/:id", async (req, res) => {
+healthRouter.get("/:id", async (req, res) => {
   try {
     const health = await Health.find({});
     res.json(health)
@@ -37,7 +37,7 @@ healthRouter.get("/health/:id", async (req, res) => {
 })
 
 //get a single user's health
-healthRouter.get("/health/:id", async (req, res) => {
+healthRouter.get("/:id", async (req, res) => {
   // res.status(200).json({
   //     "status":"ok"
   try {
@@ -51,7 +51,7 @@ healthRouter.get("/health/:id", async (req, res) => {
 });
 
 // U
-healthRouter.patch("/health/:id", async (req, res) => {
+healthRouter.patch("/:id", async (req, res) => {
   try {
     const updatedHealth = await Health.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updatedHealth) return res.status(404).json({ message: "User health not found" });

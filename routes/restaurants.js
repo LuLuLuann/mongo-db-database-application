@@ -21,7 +21,7 @@ restaurantsRouter.post("/restaurants", async (req, res) => {
 
 // R
 // get all
-restaurantsRouter.get("/restaurants", async (req, res) => {
+restaurantsRouter.get("/", async (req, res) => {
   try {
     const restaurant = await Restaurant.find({});
     res.json(restaurant)
@@ -30,8 +30,8 @@ restaurantsRouter.get("/restaurants", async (req, res) => {
   }
 })
 
-//get a single user
-restaurantsRouter.get("/restaurants/:id", async (req, res) => {
+//get a single restaurant
+restaurantsRouter.get("/:id", async (req, res) => {
   // res.status(200).json({
   //     "status":"ok"
   try {
@@ -45,7 +45,7 @@ restaurantsRouter.get("/restaurants/:id", async (req, res) => {
 });
 
 // U
-restaurantsRouter.patch("/restaurants/:id", async (req, res) => {
+restaurantsRouter.patch("/:id", async (req, res) => {
   try {
     const updatedRestaurant = await Restaurant.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updatedRestaurant) return res.status(404).json({ message: "Restaurant not found" });
@@ -56,7 +56,7 @@ restaurantsRouter.patch("/restaurants/:id", async (req, res) => {
   }
 })
 
-restaurantsRouter.delete("restaurants/:id", async (req, res) => {
+restaurantsRouter.delete("/:id", async (req, res) => {
   try {
     const deletedRestaurant = await Restaurant.findByIdAndDelete(req.params.id);
     if (!deletedRestaurant) return res.status(404).json({ message: "Restaurant not found" });
